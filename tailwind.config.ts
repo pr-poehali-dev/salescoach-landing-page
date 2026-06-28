@@ -87,13 +87,23 @@ export default {
 				'glow-pulse': {
 					'0%, 100%': { opacity: '0.4' },
 					'50%': { opacity: '0.8' }
+				},
+				'wave-drift': {
+					'0%, 100%': { transform: 'translateX(0) translateY(0) rotate(0deg)' },
+					'50%': { transform: 'translateX(-4%) translateY(2%) rotate(2deg)' }
+				},
+				'wave-drift-slow': {
+					'0%, 100%': { transform: 'translateX(0) translateY(0) rotate(0deg)' },
+					'50%': { transform: 'translateX(4%) translateY(-3%) rotate(-2deg)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.7s ease-out forwards',
-				'glow-pulse': 'glow-pulse 5s ease-in-out infinite'
+				'glow-pulse': 'glow-pulse 5s ease-in-out infinite',
+				'wave-drift': 'wave-drift 14s ease-in-out infinite',
+				'wave-drift-slow': 'wave-drift-slow 18s ease-in-out infinite'
 			}
 		}
 	},

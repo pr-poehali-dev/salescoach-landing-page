@@ -79,20 +79,57 @@ export default function Index() {
         </header>
 
         {/* Hero */}
-        <section className="mx-auto max-w-4xl px-6 pt-16 pb-24 text-center md:pt-24">
-          <div className="animate-fade-in">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-1.5 text-sm text-muted-foreground">
-              <span className="h-2 w-2 rounded-full bg-primary" />
-              AI-платформа для отделов продаж
+        <section className="relative mx-auto max-w-5xl px-6 pt-20 pb-28 text-center md:pt-28">
+          {/* Abstract purple waves */}
+          <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+            <svg
+              className="absolute left-1/2 top-1/2 h-[140%] w-[140%] -translate-x-1/2 -translate-y-1/2 animate-wave-drift opacity-70"
+              viewBox="0 0 800 800"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="wave1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="hsl(262 83% 58%)" stopOpacity="0.55" />
+                  <stop offset="100%" stopColor="hsl(282 80% 50%)" stopOpacity="0" />
+                </linearGradient>
+                <linearGradient id="wave2" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="hsl(252 90% 65%)" stopOpacity="0.45" />
+                  <stop offset="100%" stopColor="hsl(220 80% 55%)" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0 480 C 180 360 320 600 500 460 C 680 320 760 520 800 440 L 800 800 L 0 800 Z"
+                fill="url(#wave1)"
+              />
+            </svg>
+            <svg
+              className="absolute left-1/2 top-1/2 h-[150%] w-[150%] -translate-x-1/2 -translate-y-1/2 animate-wave-drift-slow opacity-60"
+              viewBox="0 0 800 800"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 360 C 160 460 340 280 520 400 C 700 520 780 340 800 420 L 800 0 L 0 0 Z"
+                fill="url(#wave2)"
+              />
+            </svg>
+            <div className="absolute left-1/2 top-1/3 h-72 w-[42rem] max-w-full -translate-x-1/2 rounded-full bg-primary/30 blur-[120px]" />
+          </div>
+
+          <div className="animate-fade-in flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary shadow-[0_0_20px_-4px_hsl(262_83%_58%/0.6)]">
+              <Icon name="Sparkles" size={15} />
+              AI-powered
             </span>
           </div>
-          <h1 className="animate-fade-in mt-8 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl" style={{ animationDelay: '0.1s', opacity: 0 }}>
+          <h1 className="animate-fade-in mx-auto mt-7 max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl" style={{ animationDelay: '0.1s', opacity: 0 }}>
             Ваши менеджеры теряют сделки?{' '}
-            <span className="bg-gradient-to-r from-primary to-violet-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
               AI покажет почему
             </span>
           </h1>
-          <p className="animate-fade-in mx-auto mt-6 max-w-2xl text-lg text-muted-foreground" style={{ animationDelay: '0.2s', opacity: 0 }}>
+          <p className="animate-fade-in mx-auto mt-7 max-w-2xl text-lg text-muted-foreground md:text-xl" style={{ animationDelay: '0.2s', opacity: 0 }}>
             Система анализирует каждый звонок ваших продавцов и даёт конкретные
             рекомендации — где теряется клиент и как закрывать больше сделок.
           </p>
