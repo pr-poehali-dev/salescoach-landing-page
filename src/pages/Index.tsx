@@ -53,6 +53,27 @@ const pains = [
   },
 ];
 
+const reviews = [
+  {
+    name: 'Алексей Петров',
+    role: 'РОП',
+    initials: 'АП',
+    text: 'Раньше я физически успевал прослушать 5–7 звонков в неделю. Теперь вижу разбор каждого разговора всей команды. За два месяца конверсия отдела выросла на 19%, а я наконец занимаюсь стратегией, а не ручным прослушиванием.',
+  },
+  {
+    name: 'Вера Новикова',
+    role: 'Директор по продажам',
+    initials: 'ВН',
+    text: 'SalesCoach показал, что менеджеры сливают сделки на этапе работы с возражениями. Мы перестроили скрипты по рекомендациям системы — средний чек поднялся на 14%, а новички выходят на план в полтора раза быстрее.',
+  },
+  {
+    name: 'Дмитрий Захаров',
+    role: 'CEO',
+    initials: 'ДЗ',
+    text: 'Впервые у меня есть объективная картина по всему отделу продаж без субъективных отчётов. Прозрачность дала свои плоды: за квартал выручка отдела выросла на 27%. Лучшая инвестиция в продажи за год.',
+  },
+];
+
 export default function Index() {
   const [team, setTeam] = useState('');
 
@@ -195,6 +216,31 @@ export default function Index() {
                 </div>
                 <h3 className="text-lg font-semibold">{p.title}</h3>
                 <p className="mt-3 text-sm text-muted-foreground">{p.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Reviews */}
+        <section className="mx-auto max-w-5xl px-6 pb-24">
+          <div className="mb-14 text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Результаты наших клиентов</h2>
+            <p className="mt-3 text-muted-foreground">Что говорят руководители отделов продаж</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {reviews.map((r) => (
+              <div key={r.name} className="flex flex-col rounded-2xl border border-border bg-card/60 p-7 backdrop-blur">
+                <Icon name="Quote" size={28} className="mb-4 text-primary/60" />
+                <p className="flex-1 text-sm leading-relaxed text-muted-foreground">{r.text}</p>
+                <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/15 text-sm font-bold text-primary">
+                    {r.initials}
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold">{r.name}</div>
+                    <div className="text-xs text-muted-foreground">{r.role}</div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
