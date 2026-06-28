@@ -3,6 +3,7 @@ import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { toast } from 'sonner';
 import {
   Select,
   SelectContent,
@@ -10,6 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+
+const LEADS_URL = 'https://functions.poehali.dev/PLACEHOLDER';
 
 const metrics = [
   { value: '+23%', label: 'рост конверсии', icon: 'TrendingUp' },
@@ -75,7 +78,37 @@ const reviews = [
 ];
 
 export default function Index() {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [company, setCompany] = useState('');
   const [team, setTeam] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !phone.trim()) {
+      toast.error('Заполните имя и телефон');
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch(LEADS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, company, team_size: team }),
+      });
+      if (!res.ok) throw new Error('request failed');
+      toast.success('Заявка отправлена! Мы скоро свяжемся с вами.');
+      setName('');
+      setPhone('');
+      setCompany('');
+      setTeam('');
+    } catch {
+      toast.error('Не удалось отправить заявку. Попробуйте позже.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans antialiased overflow-x-hidden">
@@ -255,18 +288,18 @@ export default function Index() {
                 Покажем платформу на ваших звонках за 30 минут
               </p>
             </div>
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <Label htmlFor="name">Имя</Label>
-                <Input id="name" placeholder="Как к вам обращаться" className="h-12 bg-background" />
+                <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Как к вам обращаться" className="h-12 bg-background" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Телефон</Label>
-                <Input id="phone" type="tel" placeholder="+7 (___) ___-__-__" className="h-12 bg-background" />
+                <Input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+7 (___) ___-__-__" className="h-12 bg-background" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="company">Название компании</Label>
-                <Input id="company" placeholder="ООО «Ваша компания»" className="h-12 bg-background" />
+                <Input id="company" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="ООО «Ваша компания»" className="h-12 bg-background" />
               </div>
               <div className="space-y-2">
                 <Label>Количество менеджеров</Label>
@@ -281,8 +314,8 @@ export default function Index() {
                   </SelectContent>
                 </Select>
               </div>
-              <Button type="submit" size="lg" className="h-13 w-full text-base font-semibold">
-                Хочу демо
+              <Button type="submit" size="lg" disabled={loading} className="h-13 w-full text-base font-semibold">
+                {loading ? 'Отправляем...' : 'Хочу демо'}
               </Button>
             </form>
           </div>

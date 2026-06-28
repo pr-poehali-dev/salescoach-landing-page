@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "name": "Создание заявки",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Тест Тестов",
+        "phone": "+79990001122",
+        "company": "ООО Тест",
+        "team_size": "5-20"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Список заявок",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "leads": "array"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
